@@ -1,0 +1,6 @@
+@VirtualBazaar.Core_HostAddress = http://localhost:5245
+
+GET {{VirtualBazaar.Core_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
