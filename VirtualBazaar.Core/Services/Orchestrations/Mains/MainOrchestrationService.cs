@@ -3,7 +3,7 @@ using VirtualBazaar.Core.Services.Foundations.Telegrams.Users;
 
 namespace VirtualBazaar.Core.Services.Orchestrations.Mains
 {
-    public class MainOrchestrationService
+    public class MainOrchestrationService : IMainOrchestrationService
     {
         private readonly IAdminTelegramService adminTelegramService;
         private readonly IUserTelegramService userTelegramService;

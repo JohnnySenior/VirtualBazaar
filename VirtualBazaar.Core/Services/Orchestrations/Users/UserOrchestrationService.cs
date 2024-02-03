@@ -1,20 +1,21 @@
-﻿using System;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using Telegram.Bot;
 using Telegram.Bot.Types;
+using Telegram.Bot.Types.ReplyMarkups;
 using VirtualBazaar.Core.Services.Foundations.Orders;
 using VirtualBazaar.Core.Services.Foundations.Telegrams.Users;
 using VirtualBazaar.Core.Services.Orchestrations.Mains;
 
 namespace VirtualBazaar.Core.Services.Orchestrations.Users
 {
-    public class UserOrchestrationService : IUserOrchestrationService
+    public partial class UserOrchestrationService : IUserOrchestrationService
     {
         private readonly IMainOrchestrationService mainOrchestrationService;
         private readonly IUserTelegramService userTelegramService;
         private readonly IOrderService orderService;
 
+        private const string startCommant = "/start";
         public UserOrchestrationService(
             IUserTelegramService userTelegramService,
             IOrderService orderService,
@@ -30,7 +31,10 @@ namespace VirtualBazaar.Core.Services.Orchestrations.Users
 
         private async Task HandleUserMessageAsync(ITelegramBotClient client, Update update, CancellationToken token)
         {
-            throw new NotImplementedException();
+            if (await StartAsync(update))
+                return;
+
+            return;
         }
     }
 }

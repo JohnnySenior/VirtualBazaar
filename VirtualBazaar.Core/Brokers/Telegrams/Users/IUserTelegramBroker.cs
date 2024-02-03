@@ -10,8 +10,7 @@ namespace VirtualBazaar.Core.Brokers.Telegrams.Users
 {
     public interface IUserTelegramBroker
     {
-        ValueTask SendTextMessageAsync(
-            long userTelegramId,
+        ValueTask SendMessageAsync(long userTelegramId,
             string message,
             int? replyToMessageId = null,
             ParseMode? parseMode = null,

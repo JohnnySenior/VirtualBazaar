@@ -1,6 +1,8 @@
-﻿namespace VirtualBazaar.Core.Models.Foundations
+﻿using System;
+
+namespace VirtualBazaar.Core.Models.Foundations.Orders
 {
-    public class Product
+    public class Order
     {
         public Guid Id { get; set; }
         public string Name { get; set; }

@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using VirtualBazaar.Core.Brokers.Loggings;
 using VirtualBazaar.Core.Brokers.Storages;
-using VirtualBazaar.Core.Models.Foundations;
+using VirtualBazaar.Core.Models.Foundations.Admins;
 
 namespace VirtualBazaar.Core.Services.Foundations.Admins
 {

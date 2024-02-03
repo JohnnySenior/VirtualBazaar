@@ -3,7 +3,7 @@ using System;
 
 namespace VirtualBazaar.Core.Brokers.Loggings
 {
-    public class LoggingBroker
+    public class LoggingBroker : ILoggingBroker
     {
         private ILogger<LoggingBroker> logger;
 

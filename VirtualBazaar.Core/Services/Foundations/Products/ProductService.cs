@@ -3,10 +3,10 @@ using System.Threading.Tasks;
 using System;
 using VirtualBazaar.Core.Brokers.Loggings;
 using VirtualBazaar.Core.Brokers.Storages;
-using VirtualBazaar.Core.Models.Foundations;
+using VirtualBazaar.Core.Models.Foundations.Products;
 
 namespace VirtualBazaar.Core.Services.Foundations.Products
-{ 
+{
     public class ProductService : IProductService
     {
         private readonly IStorageBroker storageBroker;

@@ -7,15 +7,16 @@ using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
 using VirtualBazaar.Core.Brokers.Loggings;
 using VirtualBazaar.Core.Brokers.Telegrams.Admins;
+using VirtualBazaar.Core.Brokers.Telegrams.Users;
 
 namespace VirtualBazaar.Core.Services.Foundations.Telegrams.Users
 {
-    public class UserTelegramService
+    public class UserTelegramService : IUserTelegramService
     {
-        private readonly IAdminTelegramBroker userTelegramBroker;
+        private readonly IUserTelegramBroker userTelegramBroker;
         private readonly ILoggingBroker loggingBroker;
 
-        public UserTelegramService(IAdminTelegramBroker userTelegramBroker,
+        public UserTelegramService(IUserTelegramBroker userTelegramBroker,
             ILoggingBroker loggingBroker)
         {
             this.userTelegramBroker = userTelegramBroker;
@@ -29,19 +30,20 @@ namespace VirtualBazaar.Core.Services.Foundations.Telegrams.Users
                 handleUpdate: handleUpdate);
         }
 
-        public async ValueTask SendTextMessageAsync(
+        public async ValueTask SendMessageAsync(
             long userTelegramId,
             string message,
             int? replyToMessageId = null,
             ParseMode? parseMode = null,
             IReplyMarkup? replyMarkup = null)
         {
-            await userTelegramBroker.SendTextMessageAsync(
-                userTelegramId: userTelegramId,
-                message: message,
-                parseMode: parseMode,
-                replyToMessageId: replyToMessageId,
-                replyMarkup: replyMarkup);
+            await this.userTelegramBroker.SendMessageAsync(
+                    userTelegramId: userTelegramId,
+                    message: message,
+                    replyToMessageId: replyToMessageId,
+                    parseMode: parseMode,
+                    replyMarkup: replyMarkup);
+
         }
     }
 }

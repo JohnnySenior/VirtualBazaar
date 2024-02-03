@@ -8,5 +8,6 @@ namespace VirtualBazaar.Core.Services.Orchestrations.Users
 {
     public interface IUserOrchestrationService
     {
+        void StartWork();
     }
 }
