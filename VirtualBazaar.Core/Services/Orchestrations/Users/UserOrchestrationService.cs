@@ -48,6 +48,12 @@ namespace VirtualBazaar.Core.Services.Orchestrations.Users
             if (await SettingsAsync(update))
                 return;
 
+            if (await MeAsync(update))
+                return;
+            
+            if (await BackAsync(update))
+                return;
+
             await WrongMessageAsync(update);
 
             return;
