@@ -4,8 +4,10 @@
     {
         Active,
         Register,
+        Contact,
         Settings,
         ChangeName,
-        ChangePhoneNumber
+        ChangePhoneNumber,
+        ChangeAddress
     }
 }

@@ -9,7 +9,20 @@ namespace VirtualBazaar.Core.Services.Orchestrations.Users
         {
             return new ReplyKeyboardMarkup(new KeyboardButton[][]
             {
-               new KeyboardButton[]{ new KeyboardButton("Share contact 📞") { RequestContact = true } },
+               new KeyboardButton[]{ new KeyboardButton("Share contact 📞") 
+               { RequestContact = true } },
+            })
+            {
+                ResizeKeyboard = true
+            };
+        }
+        
+        private static ReplyKeyboardMarkup LocationMarkup()
+        {
+            return new ReplyKeyboardMarkup(new KeyboardButton[][]
+            {
+               new KeyboardButton[]{ new KeyboardButton("Share location 📍") 
+               { RequestLocation = true } },
             })
             {
                 ResizeKeyboard = true
@@ -26,9 +39,10 @@ namespace VirtualBazaar.Core.Services.Orchestrations.Users
                 },
                 new KeyboardButton[]
                 {
-                    new KeyboardButton("Contact us ☎️"),
+                    new KeyboardButton("Me 👤"),
                     new KeyboardButton("Settings ⚙️"),
-                    new KeyboardButton("Review 🧾")
+                    new KeyboardButton("Review 📝"),
+                    new KeyboardButton("Contact us ☎️")
                 }
             };
 
@@ -45,6 +59,7 @@ namespace VirtualBazaar.Core.Services.Orchestrations.Users
                 new KeyboardButton[]
                 {
                     new KeyboardButton("Change name 🪄"),
+                    new KeyboardButton("Change address 🏡"),
                     new KeyboardButton("Change phone number 📲")
                 },
                 new KeyboardButton[]
