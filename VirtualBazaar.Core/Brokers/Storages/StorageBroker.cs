@@ -8,17 +8,13 @@ namespace VirtualBazaar.Core.Brokers.Storages
 {
     public partial class StorageBroker : EFxceptionsContext, IStorageBroker
     {
-        private readonly IConfiguration configuration;
 
-        public StorageBroker(IConfiguration configuration)
-        {
-            this.configuration = configuration;
-            this.Database.Migrate();
-        }
+        public StorageBroker() =>
+            this.Database.EnsureCreated();
 
         private async ValueTask<T> InsertAsync<T>(T @object)
         {
-            var broker = new StorageBroker(this.configuration);
+            var broker = new StorageBroker();
 
             broker.Entry(@object).State = EntityState.Added;
             await broker.SaveChangesAsync();
@@ -28,21 +24,21 @@ namespace VirtualBazaar.Core.Brokers.Storages
 
         private IQueryable<T> SelectAll<T>() where T : class
         {
-            var broker = new StorageBroker(this.configuration);
+            var broker = new StorageBroker();
 
             return broker.Set<T>();
         }
 
         private async ValueTask<T> SelectAsync<T>(params object[] objectIds) where T : class
         {
-            var broker = new StorageBroker(this.configuration);
+            var broker = new StorageBroker();
 
             return await broker.FindAsync<T>(objectIds);
         }
 
         private async ValueTask<T> UpdateAsync<T>(T @object)
         {
-            var broker = new StorageBroker(this.configuration);
+            var broker = new StorageBroker();
             broker.Entry(@object).State = EntityState.Modified;
             await broker.SaveChangesAsync();
 
@@ -51,7 +47,7 @@ namespace VirtualBazaar.Core.Brokers.Storages
 
         private async ValueTask<T> DeleteAsync<T>(T @object)
         {
-            var broker = new StorageBroker(this.configuration);
+            var broker = new StorageBroker();
             broker.Entry(@object).State = EntityState.Deleted;
             await broker.SaveChangesAsync();
 
@@ -60,7 +56,7 @@ namespace VirtualBazaar.Core.Brokers.Storages
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            string connectionString = "Data source = virtua_bazaar.db";
+            string connectionString = "Data source = virtual_bazaar.db";
             optionsBuilder.UseSqlite(connectionString);
         }
     }

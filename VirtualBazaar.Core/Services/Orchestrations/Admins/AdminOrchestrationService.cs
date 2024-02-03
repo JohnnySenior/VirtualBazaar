@@ -11,12 +11,13 @@ using VirtualBazaar.Core.Services.Orchestrations.Mains;
 
 namespace VirtualBazaar.Core.Services.Orchestrations.Admins
 {
-    public class AdminOrchestrationService : IAdminOrchestrationService
+    public partial class AdminOrchestrationService : IAdminOrchestrationService
     {
         private readonly IMainOrchestrationService mainOrchestrationService; 
         private readonly IAdminTelegramService adminTelegramService;
         private readonly IProductService productService;
 
+        private const string startCommant = "/start";
         public AdminOrchestrationService(
             IAdminTelegramService adminTelegramService,
             IProductService productService,
@@ -32,9 +33,10 @@ namespace VirtualBazaar.Core.Services.Orchestrations.Admins
 
         private async Task HandleAdminMessageAsync(ITelegramBotClient client, Update update, CancellationToken token)
         {
-            throw new NotImplementedException();
+            if (await StartAsync(update))
+                return;
+
+            return;
         }
-
-
     }
 }
