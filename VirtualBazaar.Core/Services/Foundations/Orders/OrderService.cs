@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using System;
 using VirtualBazaar.Core.Brokers.Storages;
 using VirtualBazaar.Core.Brokers.Loggings;
-using VirtualBazaar.Core.Models.Foundations;
+using VirtualBazaar.Core.Models.Foundations.Orders;
 
 namespace VirtualBazaar.Core.Services.Foundations.Orders
 {

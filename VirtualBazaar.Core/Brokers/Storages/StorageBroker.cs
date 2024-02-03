@@ -60,10 +60,8 @@ namespace VirtualBazaar.Core.Brokers.Storages
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            string connectionString =
-                this.configuration.GetConnectionString(name: "DefaultConnection");
-
-            optionsBuilder.UseSqlServer(connectionString);  
+            string connectionString = "Data source = virtua_bazaar.db";
+            optionsBuilder.UseSqlite(connectionString);
         }
     }
 }

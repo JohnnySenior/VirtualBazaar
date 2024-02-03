@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using VirtualBazaar.Core.Models.Foundations;
+using VirtualBazaar.Core.Models.Foundations.Products;
 
 namespace VirtualBazaar.Core.Brokers.Storages
 {
@@ -23,6 +23,6 @@ namespace VirtualBazaar.Core.Brokers.Storages
             await UpdateProductAsync(product);
 
         public async ValueTask<Product> DeleteProductByIdAsync(Product product) =>
-            await DeleteProductAsync(product);
+            await DeleteAsync(product);
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using System;
-using VirtualBazaar.Core.Models.Foundations;
+using VirtualBazaar.Core.Models.Foundations.Products;
 
 namespace VirtualBazaar.Core.Services.Foundations.Products
 {

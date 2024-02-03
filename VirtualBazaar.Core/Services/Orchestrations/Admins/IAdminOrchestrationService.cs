@@ -8,5 +8,6 @@ namespace VirtualBazaar.Core.Services.Orchestrations.Admins
 {
     public interface IAdminOrchestrationService
     {
+        void StartWork();
     }
 }

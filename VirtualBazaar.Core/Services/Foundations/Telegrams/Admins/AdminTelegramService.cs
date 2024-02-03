@@ -29,14 +29,14 @@ namespace VirtualBazaar.Core.Services.Foundations.Telegrams.Admins
                 handleUpdate: handleUpdate);
         }
 
-        public async ValueTask SendTextMessageAsync(
+        public async ValueTask SendMessageAsync(
             long userTelegramId,
             string message,
             int? replyToMessageId = null,
             ParseMode? parseMode = null,
             IReplyMarkup? replyMarkup = null)
         {
-            await adminTelegramBroker.SendTextMessageAsync(
+            await adminTelegramBroker.SendMessageAsync(
                 userTelegramId: userTelegramId,
                 message: message,
                 parseMode: parseMode,

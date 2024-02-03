@@ -15,7 +15,7 @@ namespace VirtualBazaar.Core.Brokers.Telegrams.Admins
 
         public AdminTelegramBroker()
         {
-            string token = "";
+            string token = "6486297329:AAFZeruXJHWP1FPh5hVtRAjIw_xCC0AByJk";
             this.telegramBotClient = new TelegramBotClient(token);
         }
 
@@ -27,24 +27,27 @@ namespace VirtualBazaar.Core.Brokers.Telegrams.Admins
                 pollingErrorHandler: HandleErrorAsync);
         }
 
-        public async ValueTask SendTextMessageAsync(
-            long userTelegramId,
-            string message,
-            int? replyToMessageId = null,
-            ParseMode? parseMode = null,
-            IReplyMarkup? replyMarkup = null)
+        public async ValueTask SendMessageAsync(
+           long userTelegramId,
+           string message,
+           int? replyToMessageId = null,
+           ParseMode? parseMode = null,
+           IReplyMarkup? replyMarkup = null)
         {
-            await telegramBotClient.SendTextMessageAsync(
-                chatId: userTelegramId,
-                text: message,
-                parseMode: parseMode,
-                replyToMessageId: replyToMessageId,
-                replyMarkup: replyMarkup);
+            await this.telegramBotClient.SendTextMessageAsync(
+                    chatId: userTelegramId,
+                    text: message,
+                    replyToMessageId: replyToMessageId,
+                    parseMode: parseMode,
+                    replyMarkup: replyMarkup);
+
         }
 
-        private Task HandleErrorAsync(ITelegramBotClient client, Exception exception, CancellationToken token)
+        private async Task HandleErrorAsync(ITelegramBotClient client, Exception exception, CancellationToken token)
         {
-            throw new NotImplementedException();
+            await client.SendTextMessageAsync(
+               chatId: 1924521160,
+               text: $"Error: {exception}");
         }
     }
 }

@@ -10,16 +10,13 @@ namespace VirtualBazaar.Core.Brokers.Telegrams.Admins
 {
     public interface IAdminTelegramBroker
     {
-        ValueTask SendTextMessageAsync(
-             long userTelegramId,
-             string message,
-             int? replyToMessageId = null,
-             ParseMode? parseMode = null,
-             IReplyMarkup? replyMarkup = null);
+        ValueTask SendMessageAsync(long userTelegramId,
+           string message,
+           int? replyToMessageId = null,
+           ParseMode? parseMode = null,
+           IReplyMarkup? replyMarkup = null);
 
         void StartBot(
              Func<ITelegramBotClient, Update, CancellationToken, Task> handleUpdate);
-
-
     }
 }
