@@ -15,8 +15,10 @@ namespace VirtualBazaar.Core.Services.Orchestrations.Users
         private readonly IUserTelegramService userTelegramService;
         private readonly IUserService userService;
         private readonly IOrderService orderService;
-
         private const string startCommant = "/start";
+        private const string settingsCommand = "Settings ⚙️";
+        private const string backCommand = "⬅️ Back";
+
         public UserOrchestrationService(
             IUserTelegramService userTelegramService,
             IOrderService orderService,
@@ -41,6 +43,9 @@ namespace VirtualBazaar.Core.Services.Orchestrations.Users
                 return;
 
             if (await RegisterAsync(update))
+                return;
+            
+            if (await SettingsAsync(update))
                 return;
 
             await WrongMessageAsync(update);

@@ -3,6 +3,9 @@
     public enum UserStatus
     {
         Active,
-        Register
+        Register,
+        Settings,
+        ChangeName,
+        ChangePhoneNumber
     }
 }

@@ -37,5 +37,26 @@ namespace VirtualBazaar.Core.Services.Orchestrations.Users
                 ResizeKeyboard = true
             };
         }
+        
+        private static ReplyKeyboardMarkup SettingsMarkup()
+        {
+            var keyboardButtons = new List<KeyboardButton[]>
+            {
+                new KeyboardButton[]
+                {
+                    new KeyboardButton("Change name 🪄"),
+                    new KeyboardButton("Change phone number 📲")
+                },
+                new KeyboardButton[]
+                {
+                    new KeyboardButton("⬅️ Back")
+                }
+            };
+
+            return new ReplyKeyboardMarkup(keyboardButtons)
+            {
+                ResizeKeyboard = true
+            };
+        }
     }
 }

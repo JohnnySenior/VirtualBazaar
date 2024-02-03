@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Telegram.Bot.Types;
+using Telegram.Bot.Types.ReplyMarkups;
 using VirtualBazaar.Core.Models.Foundations.Users;
 
 namespace VirtualBazaar.Core.Services.Orchestrations.Users
@@ -23,17 +24,17 @@ namespace VirtualBazaar.Core.Services.Orchestrations.Users
                         await this.userService.ModifyUserAsync(user);
                     }
 
-                    var menuMarkup = MenuMarkup();
+                    ReplyKeyboardMarkup menuMarkup = MenuMarkup();
 
                     await this.userTelegramService.SendMessageAsync(
                         userTelegramId: update.Message.Chat.Id,
                         replyMarkup: menuMarkup,
-                        message: "Choose 👀");
+                        message: "Choose 👀:");
 
                     return true;
                 }
 
-                var markup = ContactMarkup();
+                ReplyKeyboardMarkup markup = ContactMarkup();
 
                 await this.userTelegramService.SendMessageAsync(
                     userTelegramId: update.Message.Chat.Id,

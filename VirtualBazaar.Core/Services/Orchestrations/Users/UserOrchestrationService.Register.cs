@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
+using Telegram.Bot.Types.ReplyMarkups;
 using VirtualBazaar.Core.Models.Foundations.Users;
 
 namespace VirtualBazaar.Core.Services.Orchestrations.Users
@@ -29,12 +30,12 @@ namespace VirtualBazaar.Core.Services.Orchestrations.Users
                         user.UserStatus = UserStatus.Active;
                         await this.userService.ModifyUserAsync(user);
 
-                        var markup = MenuMarkup();
+                        ReplyKeyboardMarkup markup = MenuMarkup();
 
                         await this.userTelegramService.SendMessageAsync(
                             userTelegramId: update.Message.Chat.Id,
                             replyMarkup: markup,
-                            message: "Good, choose the options please 👀");
+                            message: "Good, choose the options please 👀:");
                     }
                     else
                     {
