@@ -43,6 +43,17 @@ namespace VirtualBazaar.Core.Brokers.Telegrams.Users
 
         }
 
+        public async ValueTask SendPhotoAsync(
+            long telegramId, 
+            IReplyMarkup replyMarkup, 
+            InputFile photo, 
+            string caption) =>
+           await this.telegramBotClient.SendPhotoAsync(
+               chatId: telegramId, 
+               replyMarkup: replyMarkup, 
+               photo: photo, 
+               caption: caption);
+
         private async Task HandleErrorAsync(ITelegramBotClient client, Exception exception, CancellationToken token)
         {
             await client.SendTextMessageAsync(

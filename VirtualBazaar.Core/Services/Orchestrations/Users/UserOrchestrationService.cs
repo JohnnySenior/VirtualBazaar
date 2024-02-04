@@ -3,7 +3,9 @@ using System.Threading.Tasks;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using VirtualBazaar.Core.Services.Foundations.Admins;
+using VirtualBazaar.Core.Services.Foundations.Categories;
 using VirtualBazaar.Core.Services.Foundations.Orders;
+using VirtualBazaar.Core.Services.Foundations.Products;
 using VirtualBazaar.Core.Services.Foundations.Telegrams.Users;
 using VirtualBazaar.Core.Services.Foundations.Users;
 using VirtualBazaar.Core.Services.Orchestrations.Mains;
@@ -17,6 +19,8 @@ namespace VirtualBazaar.Core.Services.Orchestrations.Users
         private readonly IUserService userService;
         private readonly IOrderService orderService;
         private readonly IAdminService adminService;
+        private readonly ICategoryService categoryService;
+        private readonly IProductService productService;
         private const string startCommant = "/start";
         private const string settingsCommand = "Settings ⚙️";
         private const string backCommand = "⬅️ Back";
@@ -26,13 +30,17 @@ namespace VirtualBazaar.Core.Services.Orchestrations.Users
             IOrderService orderService,
             IMainOrchestrationService mainOrchestrationService,
             IUserService userService,
-            IAdminService adminService)
+            IAdminService adminService,
+            ICategoryService categoryService,
+            IProductService productService)
         {
             this.userTelegramService = userTelegramService;
             this.orderService = orderService;
             this.mainOrchestrationService = mainOrchestrationService;
             this.userService = userService;
             this.adminService = adminService;
+            this.categoryService = categoryService;
+            this.productService = productService;
         }
 
         public void StartWork() =>
@@ -56,6 +64,15 @@ namespace VirtualBazaar.Core.Services.Orchestrations.Users
                 return;
             
             if (await ContactUsAsync(update))
+                return;
+            
+            if (await MenuAsync(update))
+                return;
+            
+            if (await CategoriesAsync(update))
+                return;
+            
+            if (await ProductAsync(update))
                 return;
             
             if (await BackAsync(update))

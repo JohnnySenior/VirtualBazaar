@@ -6,6 +6,7 @@ using VirtualBazaar.Core.Brokers.Storages;
 using VirtualBazaar.Core.Brokers.Telegrams.Admins;
 using VirtualBazaar.Core.Brokers.Telegrams.Users;
 using VirtualBazaar.Core.Services.Foundations.Admins;
+using VirtualBazaar.Core.Services.Foundations.Categories;
 using VirtualBazaar.Core.Services.Foundations.Orders;
 using VirtualBazaar.Core.Services.Foundations.Products;
 using VirtualBazaar.Core.Services.Foundations.Telegrams.Admins;
@@ -36,6 +37,7 @@ builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<IAdminService, AdminService>();
 builder.Services.AddTransient<IOrderService, OrderService>();
 builder.Services.AddTransient<IProductService, ProductService>();
+builder.Services.AddTransient<ICategoryService, CategoryService>();
 
 builder.Services.AddTransient<IUserOrchestrationService, UserOrchestrationService>();
 builder.Services.AddTransient<IAdminOrchestrationService, AdminOrchestrationService>();

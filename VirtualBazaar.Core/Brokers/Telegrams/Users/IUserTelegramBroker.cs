@@ -16,6 +16,12 @@ namespace VirtualBazaar.Core.Brokers.Telegrams.Users
             ParseMode? parseMode = null,
             IReplyMarkup? replyMarkup = null);
 
+        ValueTask SendPhotoAsync(
+             long telegramId,
+             IReplyMarkup replyMarkup,
+             InputFile photo,
+             string caption);
+
         void StartBot(
              Func<ITelegramBotClient, Update, CancellationToken, Task> handleUpdate);
     }

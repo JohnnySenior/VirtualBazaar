@@ -11,9 +11,10 @@ namespace VirtualBazaar.Core.Models.Foundations.Products
         public string Name { get; set; }
         public decimal Price { get; set; }
         public int Count { get; set; }
-
+        public string PhotoUrl { get; set; }
         public Guid AdminId { get; set; }
         public Admin Admin { get; set; }
+        public Guid CategoryId { get; set; }
         public Category Categories { get; set; }
     }
 }

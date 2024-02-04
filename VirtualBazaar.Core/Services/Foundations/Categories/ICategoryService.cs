@@ -8,7 +8,6 @@ namespace VirtualBazaar.Core.Services.Foundations.Categories
     {
         ValueTask<Category> AddCategoryAsync(Category category);
         IQueryable<Category> RetrieveAllCategorys();
-        ValueTask<Category> ModifyCategoryAsync(Category category);
         ValueTask<Category> RemoveCategoryAsync(Category category);
     }
 }
