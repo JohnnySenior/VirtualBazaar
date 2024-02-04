@@ -19,7 +19,7 @@ namespace VirtualBazaar.Core.Services.Orchestrations.Users
                 {
                     await this.userTelegramService.SendMessageAsync(
                         userTelegramId: update.Message.Chat.Id,
-                        message: $"{admin.OrganiztionName}\nNumber: {admin.PhoneNumber}\nAddress: {admin.Address}");
+                        message: $"{admin.OrganizationName}\nNumber: {admin.PhoneNumber}\nAddress: {admin.Address}");
 
                     return true;
                 }

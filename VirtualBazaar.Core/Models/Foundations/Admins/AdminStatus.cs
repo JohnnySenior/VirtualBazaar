@@ -2,7 +2,13 @@
 {
     public enum AdminStatus
     {
-        Unknown,
-        Register
+        Active,
+        Register,
+        Contact,
+        Location,
+        Settings,
+        ChangeName,
+        ChangePhoneNumber,
+        ChangeAddress
     }
 }
