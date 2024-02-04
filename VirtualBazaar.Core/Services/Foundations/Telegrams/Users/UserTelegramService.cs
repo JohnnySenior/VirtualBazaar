@@ -45,5 +45,18 @@ namespace VirtualBazaar.Core.Services.Foundations.Telegrams.Users
                     replyMarkup: replyMarkup);
 
         }
+
+        public async ValueTask SendPhotoAsync(
+            long telegramId,
+            IReplyMarkup replyMarkup,
+            InputFile photo, 
+            string caption)
+        {
+            await this.userTelegramBroker.SendPhotoAsync(
+                telegramId,
+                replyMarkup,
+                photo,
+                caption);
+        }
     }
 }

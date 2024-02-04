@@ -15,7 +15,7 @@ namespace VirtualBazaar.Core.Brokers.Telegrams.Admins
 
         public AdminTelegramBroker()
         {
-            string token = "6486297329:AAFZeruXJHWP1FPh5hVtRAjIw_xCC0AByJk";
+            string token = "";
             this.telegramBotClient = new TelegramBotClient(token);
         }
 

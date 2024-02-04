@@ -8,6 +8,9 @@
         Settings,
         ChangeName,
         ChangePhoneNumber,
-        ChangeAddress
+        ChangeAddress,
+        Menu,
+        Category,
+        Product
     }
 }

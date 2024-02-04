@@ -12,6 +12,7 @@ namespace VirtualBazaar.Core.Models.Foundations.Users
         public string Address { get; set; }
         public string PhoneNumber { get; set; }
         public long TelegramId { get; set; }
+        public Guid HelperId { get; set; }
         public UserStatus UserStatus { get; set; }
 
         public ICollection<Order> Orders { get; set; }

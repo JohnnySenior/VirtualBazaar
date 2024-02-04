@@ -6,7 +6,7 @@ using VirtualBazaar.Core.Models.Foundations.Categories;
 
 namespace VirtualBazaar.Core.Services.Foundations.Categories
 {
-    public class CategoryService
+    public class CategoryService : ICategoryService
     {
         private readonly IStorageBroker storageBroker;
         private readonly ILoggingBroker loggingBroker;
