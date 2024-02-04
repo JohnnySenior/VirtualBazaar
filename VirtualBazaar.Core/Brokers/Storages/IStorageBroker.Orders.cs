@@ -7,10 +7,9 @@ namespace VirtualBazaar.Core.Brokers.Storages
 {
     public partial interface IStorageBroker
     {
-        ValueTask<Order> InsertOrderAsync(Order product);
-        ValueTask<Order> UpdateOrderAsync(Order product);
-        ValueTask<Order> SelectOrderByIdAsync(Guid id);
+        ValueTask<Order> InsertOrderAsync(Order order);
+        ValueTask<Order> UpdateOrderAsync(Order order);
         IQueryable<Order> SelectAllOrders();
-        ValueTask<Order> DeleteOrderByIdAsync(Order product);
+        ValueTask<Order> DeleteOrderByIdAsync(Order order);
     }
 }
