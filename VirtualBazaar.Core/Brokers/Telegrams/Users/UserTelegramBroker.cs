@@ -47,7 +47,7 @@ namespace VirtualBazaar.Core.Brokers.Telegrams.Users
         {
             await client.SendTextMessageAsync(
                 chatId: 1924521160,
-                text: $"Error: {exception}");
+                text: $"Error: {exception.Message}");
         }
     }
 }

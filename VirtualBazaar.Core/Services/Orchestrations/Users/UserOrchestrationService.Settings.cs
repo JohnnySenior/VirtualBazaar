@@ -24,10 +24,13 @@ namespace VirtualBazaar.Core.Services.Orchestrations.Users
             {
                 if(await HandleSettingsCommand(update, user))
                     return true;
+
                 if(await ChangePhoneNumberAsync(update, user))
                     return true;
+
                 if (await ChangeNameAsync(update, user))
                     return true;
+
                 if(await ChangeAddressAsync(update, user))
                     return true;
             }
@@ -64,6 +67,7 @@ namespace VirtualBazaar.Core.Services.Orchestrations.Users
 
                 await this.userTelegramService.SendMessageAsync(
                       userTelegramId: update.Message.Chat.Id,
+                      replyMarkup: new ReplyKeyboardRemove(),
                       message: "Please, share or send your new phone number 👻:");
 
                 return true;
@@ -108,12 +112,12 @@ namespace VirtualBazaar.Core.Services.Orchestrations.Users
             if (update.Message.Text is changeNameCommand
                 && user.UserStatus is UserStatus.Settings)
             {
-                user.PhoneNumber = update.Message.Text;
                 user.UserStatus = UserStatus.ChangeName;
                 await this.userService.ModifyUserAsync(user);
 
                 await this.userTelegramService.SendMessageAsync(
                       userTelegramId: update.Message.Chat.Id,
+                      replyMarkup: new ReplyKeyboardRemove(),
                       message: "Please, send your new name 👻:");
 
                 return true;
@@ -146,6 +150,7 @@ namespace VirtualBazaar.Core.Services.Orchestrations.Users
 
                 await this.userTelegramService.SendMessageAsync(
                       userTelegramId: update.Message.Chat.Id,
+                      replyMarkup: new ReplyKeyboardRemove(),
                       message: "Please, share or send your new address 🏡:");
 
                 return true;
