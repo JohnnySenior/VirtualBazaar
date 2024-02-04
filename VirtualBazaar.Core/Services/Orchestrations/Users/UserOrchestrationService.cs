@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Telegram.Bot;
 using Telegram.Bot.Types;
+using VirtualBazaar.Core.Services.Foundations.Admins;
 using VirtualBazaar.Core.Services.Foundations.Orders;
 using VirtualBazaar.Core.Services.Foundations.Telegrams.Users;
 using VirtualBazaar.Core.Services.Foundations.Users;
@@ -15,6 +16,7 @@ namespace VirtualBazaar.Core.Services.Orchestrations.Users
         private readonly IUserTelegramService userTelegramService;
         private readonly IUserService userService;
         private readonly IOrderService orderService;
+        private readonly IAdminService adminService;
         private const string startCommant = "/start";
         private const string settingsCommand = "Settings ⚙️";
         private const string backCommand = "⬅️ Back";
@@ -23,12 +25,14 @@ namespace VirtualBazaar.Core.Services.Orchestrations.Users
             IUserTelegramService userTelegramService,
             IOrderService orderService,
             IMainOrchestrationService mainOrchestrationService,
-            IUserService userService)
+            IUserService userService,
+            IAdminService adminService)
         {
             this.userTelegramService = userTelegramService;
             this.orderService = orderService;
             this.mainOrchestrationService = mainOrchestrationService;
             this.userService = userService;
+            this.adminService = adminService;
         }
 
         public void StartWork() =>
@@ -49,6 +53,9 @@ namespace VirtualBazaar.Core.Services.Orchestrations.Users
                 return;
 
             if (await MeAsync(update))
+                return;
+            
+            if (await ContactUsAsync(update))
                 return;
             
             if (await BackAsync(update))
