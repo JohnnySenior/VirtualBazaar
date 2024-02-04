@@ -1,19 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
 using VirtualBazaar.Core.Models.Foundations.Admins;
-using VirtualBazaar.Core.Models.Foundations.Categories;
+using VirtualBazaar.Core.Models.Foundations.Products;
 using VirtualBazaar.Core.Models.Foundations.Users;
 
-namespace VirtualBazaar.Core.Models.Foundations.Products
+namespace VirtualBazaar.Core.Models.Foundations.Categories
 {
-    public class Product
+    public class Category
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public decimal Price { get; set; }
-        public int Count { get; set; }
 
         public Guid AdminId { get; set; }
         public Admin Admin { get; set; }
-        public Category Categories { get; set; }
+        public ICollection<Product> Products { get; set; }
     }
 }

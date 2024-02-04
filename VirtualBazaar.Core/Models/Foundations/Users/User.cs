@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using VirtualBazaar.Core.Models.Foundations.Orders;
 
 namespace VirtualBazaar.Core.Models.Foundations.Users
 {
@@ -9,7 +12,8 @@ namespace VirtualBazaar.Core.Models.Foundations.Users
         public string Address { get; set; }
         public string PhoneNumber { get; set; }
         public long TelegramId { get; set; }
-
         public UserStatus UserStatus { get; set; }
+
+        public ICollection<Order> Orders { get; set; }
     }
 }
