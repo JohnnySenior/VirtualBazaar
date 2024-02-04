@@ -27,7 +27,7 @@ namespace VirtualBazaar.Core.Services.Orchestrations.Users
                 {
                     await this.userTelegramService.SendMessageAsync(
                         userTelegramId: update.Message.Chat.Id,
-                        message: $"In process...");
+                        message: $"Under developing...");
 
                     return true;
                 }

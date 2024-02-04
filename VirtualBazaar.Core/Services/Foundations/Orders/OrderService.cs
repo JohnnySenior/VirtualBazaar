@@ -1,8 +1,7 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using System;
-using VirtualBazaar.Core.Brokers.Storages;
 using VirtualBazaar.Core.Brokers.Loggings;
+using VirtualBazaar.Core.Brokers.Storages;
 using VirtualBazaar.Core.Models.Foundations.Orders;
 
 namespace VirtualBazaar.Core.Services.Foundations.Orders
@@ -22,9 +21,6 @@ namespace VirtualBazaar.Core.Services.Foundations.Orders
 
         public async ValueTask<Order> AddOrderAsync(Order order) =>
             await this.storageBroker.InsertOrderAsync(order);
-
-        public async ValueTask<Order> RetrieveOrderWithTeacherByIdAsync(Guid orderId) =>
-            await this.storageBroker.SelectOrderByIdAsync(orderId);
 
         public IQueryable<Order> RetrieveAllOrders() =>
             this.storageBroker.SelectAllOrders();
