@@ -14,7 +14,10 @@ namespace VirtualBazaar.Core.Services.Orchestrations.Users
 
             if (user is not null)
             {
-                if (user.UserStatus is UserStatus.Category)
+                var checkProductOrNot = CheckOnChooseProduct(update);
+
+                if (user.UserStatus is UserStatus.Category
+                    && checkProductOrNot is true)
                 {
                     var product = this.productService
                         .RetrieveAllProducts().FirstOrDefault(p => p.Name == update.Message.Text);
@@ -27,7 +30,7 @@ namespace VirtualBazaar.Core.Services.Orchestrations.Users
                         telegramId: update.Message.Chat.Id,
                         replyMarkup: markup,
                         photo: InputFile.FromUri($"{product.PhotoUrl}"),
-                        caption: $"Dish 🍓: {product.Name}\nPrice: {product.Price} 💵\nRemind: {product.Count} 💡");
+                        caption: $"Dish 🍓: {product.Name}\nPrice 💵: {product.Price}\nRemindn 💡: {product.Count}");
 
                     return true;
                 }
@@ -36,6 +39,27 @@ namespace VirtualBazaar.Core.Services.Orchestrations.Users
             }
 
             return false;
+        }
+
+        public bool CheckOnChooseProduct(Update update)
+        {
+            int count = 0;
+
+            var products = this.productService
+                       .RetrieveAllProducts();
+
+            foreach (var product in products)
+            {
+                if (update.Message.Text == product.Name)
+                {
+                    count++;
+                }
+            }
+
+            if (count > 0)
+                return true;
+            else
+                return false;
         }
     }
 }

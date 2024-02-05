@@ -12,7 +12,5 @@ namespace VirtualBazaar.Core.Models.Foundations.Categories
         public string Name { get; set; }
 
         public Guid AdminId { get; set; }
-        public Admin Admin { get; set; }
-        public ICollection<Product> Products { get; set; }
     }
 }

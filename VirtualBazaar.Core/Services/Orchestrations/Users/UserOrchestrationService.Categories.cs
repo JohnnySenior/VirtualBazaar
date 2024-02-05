@@ -1,6 +1,8 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Components;
 using Telegram.Bot.Types;
+using VirtualBazaar.Core.Models.Foundations.Categories;
 using VirtualBazaar.Core.Models.Foundations.Users;
 
 namespace VirtualBazaar.Core.Services.Orchestrations.Users
@@ -14,7 +16,10 @@ namespace VirtualBazaar.Core.Services.Orchestrations.Users
 
             if (user is not null)
             {
-                if (user.UserStatus is UserStatus.Menu)
+                var checkCategoryOrNot = CheckOnChooseCategory(update);
+
+                if (user.UserStatus is UserStatus.Menu 
+                    && checkCategoryOrNot is true)
                 {
                     var category = this.categoryService
                         .RetrieveAllCategorys().FirstOrDefault(c => c.Name == update.Message.Text);
@@ -30,10 +35,33 @@ namespace VirtualBazaar.Core.Services.Orchestrations.Users
                            userTelegramId: update.Message.Chat.Id,
                            replyMarkup: markup,
                            message: $"Good choice, what type of {category.Name} do you want? 🤤");
+
+                    return true;
                 }
             }
 
             return false;
+        }
+
+        public bool CheckOnChooseCategory(Update update)
+        {
+            int count = 0;
+
+            var categories = this.categoryService
+                       .RetrieveAllCategorys();
+
+            foreach (var category in categories)
+            {
+                if (update.Message.Text == category.Name)
+                {
+                    count++;
+                }
+            }
+
+            if (count > 0)
+                return true;
+            else
+                return false;
         }
     }
 }

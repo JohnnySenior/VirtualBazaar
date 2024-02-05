@@ -14,6 +14,5 @@ namespace VirtualBazaar.Core.Models.Foundations.Admins
         public long TelegramId { get; set; }
         public AdminStatus AdminStatus { get; set; }
 
-        public ICollection<Product> Products { get; set; }
     }
 }

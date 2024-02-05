@@ -11,7 +11,7 @@ namespace VirtualBazaar.Core.Brokers.Storages
         public DbSet<Order> Orders { get; set; }
 
         public async ValueTask<Order> InsertOrderAsync(Order order) =>
-            await InsertOrderAsync(order);
+            await InsertAsync(order);
 
         public IQueryable<Order> SelectAllOrders() =>
             SelectAll<Order>();

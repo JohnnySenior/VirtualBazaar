@@ -8,7 +8,6 @@ namespace VirtualBazaar.Core.Brokers.Storages
 {
     public partial class StorageBroker : EFxceptionsContext, IStorageBroker
     {
-
         public StorageBroker() =>
             this.Database.EnsureCreated();
 

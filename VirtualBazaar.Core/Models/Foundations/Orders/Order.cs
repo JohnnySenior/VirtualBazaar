@@ -11,6 +11,5 @@ namespace VirtualBazaar.Core.Models.Foundations.Orders
         public int Count { get; set; }
 
         public Guid UserId { get; set; }
-        public User User { get; set; }
     }
 }
