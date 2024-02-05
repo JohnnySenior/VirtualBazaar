@@ -1,7 +1,12 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Telegram.Bot;
 using Telegram.Bot.Types;
+using VirtualBazaar.Core.Brokers.Storages;
+using VirtualBazaar.Core.Models.Foundations.Categories;
+using VirtualBazaar.Core.Models.Foundations.Orders;
+using VirtualBazaar.Core.Models.Foundations.Products;
 using VirtualBazaar.Core.Services.Foundations.Admins;
 using VirtualBazaar.Core.Services.Foundations.Categories;
 using VirtualBazaar.Core.Services.Foundations.Orders;
@@ -51,30 +56,50 @@ namespace VirtualBazaar.Core.Services.Orchestrations.Users
             Update update, 
             CancellationToken token)
         {
+
+            //var category = new Category
+            //{
+            //    Id = Guid.NewGuid(),
+            //    Name = "Boni"
+            //};
+            //await this.categoryService.AddCategoryAsync(category);
+
+            //var product = new Product
+            //{
+            //    Id = Guid.NewGuid(),
+            //    Name = "nana",
+            //    Price = 100,
+            //    Count = 10,
+            //    PhotoUrl = "https://static.insales-cdn.com/images/products/1/2641/245615185/%D1%81%D0%B0%D0%BC%D1%81%D0%B0_%D1%81_%D0%B3%D0%BE%D0%B2%D1%8F%D0%B4.jpg",
+            //    CategoryId = new Guid("34498B99-5FB2-4312-86A4-24B558445825")
+            //}; ;
+            //await this.productService.AddProductAsync(product);
+
+
             if (await StartAsync(update))
                 return;
 
             if (await RegisterAsync(update))
                 return;
-            
+
             if (await SettingsAsync(update))
                 return;
 
             if (await MeAsync(update))
                 return;
-            
+
             if (await ContactUsAsync(update))
                 return;
-            
+
             if (await MenuAsync(update))
                 return;
-            
+
             if (await CategoriesAsync(update))
                 return;
-            
+
             if (await ProductAsync(update))
                 return;
-            
+
             if (await BackAsync(update))
                 return;
 

@@ -13,8 +13,6 @@ namespace VirtualBazaar.Core.Models.Foundations.Products
         public int Count { get; set; }
         public string PhotoUrl { get; set; }
         public Guid AdminId { get; set; }
-        public Admin Admin { get; set; }
         public Guid CategoryId { get; set; }
-        public Category Categories { get; set; }
     }
 }

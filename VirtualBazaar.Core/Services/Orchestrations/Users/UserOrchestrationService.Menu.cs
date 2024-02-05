@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.ReplyMarkups;
@@ -19,14 +17,22 @@ namespace VirtualBazaar.Core.Services.Orchestrations.Users
 
             if (update.Message.Text is menuCommant)
             {
-                ReplyKeyboardMarkup markup = CategoriesMarkup();
+                var categories = this.categoryService.RetrieveAllCategorys();
+                string message = "Welcome to Menu, choose what you like 🍓:";
+
+                if (categories == null || !categories.Any())
+                {
+                    message = "Empty :(";
+                }
+
+                ReplyKeyboardMarkup markup = CategoriesMarkup(categories);
                 user.UserStatus = UserStatus.Menu;
                 await this.userService.ModifyUserAsync(user);
 
                 await this.userTelegramService.SendMessageAsync(
                            userTelegramId: update.Message.Chat.Id,
                            replyMarkup: markup,
-                           message: "Welcome to Menu, choose what you like 🍓:");
+                           message: message);
 
                 return true;
             }

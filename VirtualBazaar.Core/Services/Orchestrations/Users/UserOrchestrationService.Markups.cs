@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Telegram.Bot.Types.ReplyMarkups;
+using VirtualBazaar.Core.Models.Foundations.Categories;
 using VirtualBazaar.Core.Models.Foundations.Products;
 
 namespace VirtualBazaar.Core.Services.Orchestrations.Users
@@ -76,10 +77,8 @@ namespace VirtualBazaar.Core.Services.Orchestrations.Users
             };
         }
 
-        private ReplyKeyboardMarkup CategoriesMarkup()
+        private ReplyKeyboardMarkup CategoriesMarkup(IQueryable<Category> categories)
         {
-            var categories = this.categoryService.RetrieveAllCategorys();
-
             var buttons = new List<KeyboardButton[]>();
             List<KeyboardButton> rowButtons = new List<KeyboardButton>();
 
@@ -140,22 +139,30 @@ namespace VirtualBazaar.Core.Services.Orchestrations.Users
 
         private static ReplyKeyboardMarkup ProductMarkup()
         {
-            var keyboardButtons = new List<KeyboardButton[]>
+            var keyboardButtons = new List<KeyboardButton[]>();
+
+            for (int i = 1; i <= 9; i += 3)
             {
-                new KeyboardButton[]
+                var rowButtons = new List<KeyboardButton>();
+
+                for (int j = 0; j < 3 && i + j <= 9; j++)
                 {
-                    new KeyboardButton("Counts..."),
-                },
-                new KeyboardButton[]
-                {
-                    new KeyboardButton("⬅️ Back")
+                    rowButtons.Add(new KeyboardButton((i + j).ToString()));
                 }
-            };
+
+                keyboardButtons.Add(rowButtons.ToArray());
+            }
+
+            keyboardButtons.Add(new KeyboardButton[]
+            {
+                new KeyboardButton("⬅️ Back")
+            });
 
             return new ReplyKeyboardMarkup(keyboardButtons)
             {
                 ResizeKeyboard = true
             };
         }
+
     }
 }

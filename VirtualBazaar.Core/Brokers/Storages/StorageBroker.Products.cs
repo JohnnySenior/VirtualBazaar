@@ -11,7 +11,7 @@ namespace VirtualBazaar.Core.Brokers.Storages
         public DbSet<Product> Products { get; set; }
 
         public async ValueTask<Product> InsertProductAsync(Product product) =>
-            await InsertProductAsync(product);
+            await InsertAsync(product);
 
         public async ValueTask<Product> SelectProductByIdAsync(Guid id) =>
             await SelectAsync<Product>(id);
