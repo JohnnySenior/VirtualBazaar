@@ -3,9 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Telegram.Bot;
 using Telegram.Bot.Types;
-using VirtualBazaar.Core.Brokers.Storages;
 using VirtualBazaar.Core.Models.Foundations.Categories;
-using VirtualBazaar.Core.Models.Foundations.Orders;
 using VirtualBazaar.Core.Models.Foundations.Products;
 using VirtualBazaar.Core.Services.Foundations.Admins;
 using VirtualBazaar.Core.Services.Foundations.Categories;
@@ -29,6 +27,8 @@ namespace VirtualBazaar.Core.Services.Orchestrations.Users
         private const string startCommant = "/start";
         private const string settingsCommand = "Settings ⚙️";
         private const string backCommand = "⬅️ Back";
+        private const string basketCommand = "📥 Basket";
+        private const string clearBasketCommand = "🔄 Clear";
 
         public UserOrchestrationService(
             IUserTelegramService userTelegramService,
@@ -52,26 +52,26 @@ namespace VirtualBazaar.Core.Services.Orchestrations.Users
             this.userTelegramService.StartBot(HandleUserMessageAsync);
 
         private async Task HandleUserMessageAsync(
-            ITelegramBotClient client, 
-            Update update, 
+            ITelegramBotClient client,
+            Update update,
             CancellationToken token)
         {
 
             //var category = new Category
             //{
             //    Id = Guid.NewGuid(),
-            //    Name = "Boni"
+            //    Name = "Shashlik"
             //};
             //await this.categoryService.AddCategoryAsync(category);
 
             //var product = new Product
             //{
-            //    Id = Guid.NewGuid(),
-            //    Name = "nana",
-            //    Price = 100,
-            //    Count = 10,
+            //Id = Guid.NewGuid(),
+            //    Name = "Shashlik gushli",
+            //    Price = 1000,
+            //    Count = 50,
             //    PhotoUrl = "https://static.insales-cdn.com/images/products/1/2641/245615185/%D1%81%D0%B0%D0%BC%D1%81%D0%B0_%D1%81_%D0%B3%D0%BE%D0%B2%D1%8F%D0%B4.jpg",
-            //    CategoryId = new Guid("34498B99-5FB2-4312-86A4-24B558445825")
+            //    CategoryId = category.Id
             //}; ;
             //await this.productService.AddProductAsync(product);
 
@@ -98,6 +98,21 @@ namespace VirtualBazaar.Core.Services.Orchestrations.Users
                 return;
 
             if (await ProductAsync(update))
+                return;
+
+            if (await CountOfProductAsync(update))
+                return;
+
+            if (await BasketAsync(update))
+                return;
+
+            if (await ClearBasketAsync(update))
+                return;
+
+            if (await DeleteOrderAsync(update))
+                return;
+
+            if (await PlaceAnOrderAsync(update))
                 return;
 
             if (await BackAsync(update))

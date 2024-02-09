@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using Telegram.Bot.Types.ReplyMarkups;
 using VirtualBazaar.Core.Models.Foundations.Categories;
+using VirtualBazaar.Core.Models.Foundations.Orders;
 using VirtualBazaar.Core.Models.Foundations.Products;
 
 namespace VirtualBazaar.Core.Services.Orchestrations.Users
@@ -81,6 +83,7 @@ namespace VirtualBazaar.Core.Services.Orchestrations.Users
         {
             var buttons = new List<KeyboardButton[]>();
             List<KeyboardButton> rowButtons = new List<KeyboardButton>();
+            buttons.Add(new KeyboardButton[] { new KeyboardButton(basketCommand) });
 
             foreach (var category in categories)
             {
@@ -111,6 +114,7 @@ namespace VirtualBazaar.Core.Services.Orchestrations.Users
         {
             var buttons = new List<KeyboardButton[]>();
             List<KeyboardButton> rowButtons = new List<KeyboardButton>();
+            buttons.Add(new KeyboardButton[] { new KeyboardButton(basketCommand) });
 
             foreach (var product in products)
             {
@@ -140,6 +144,7 @@ namespace VirtualBazaar.Core.Services.Orchestrations.Users
         private static ReplyKeyboardMarkup ProductMarkup()
         {
             var keyboardButtons = new List<KeyboardButton[]>();
+            keyboardButtons.Add(new KeyboardButton[] { new KeyboardButton(basketCommand) });
 
             for (int i = 1; i <= 9; i += 3)
             {
@@ -164,5 +169,29 @@ namespace VirtualBazaar.Core.Services.Orchestrations.Users
             };
         }
 
+        private static ReplyKeyboardMarkup BasketMarkup(IQueryable<Order> orders)
+        {
+            var keyboardButtons = new List<KeyboardButton[]>();
+
+            foreach (var order in orders)
+            {
+                var orderButton = new KeyboardButton($"❌ {order.Name}");
+                keyboardButtons.Add(new KeyboardButton[] { orderButton });
+            }
+
+            keyboardButtons.Add(new KeyboardButton[]
+            {
+                new KeyboardButton("⬅️ Back"),
+                new KeyboardButton("🔄 Clear"),
+                
+            });
+
+            keyboardButtons.Add(new KeyboardButton[] { "Place an order ✅" });
+
+            return new ReplyKeyboardMarkup(keyboardButtons)
+            {
+                ResizeKeyboard = true
+            };
+        }
     }
 }

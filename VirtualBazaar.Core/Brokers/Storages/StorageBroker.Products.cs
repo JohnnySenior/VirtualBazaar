@@ -20,9 +20,9 @@ namespace VirtualBazaar.Core.Brokers.Storages
             SelectAll<Product>();
 
         public async ValueTask<Product> UpdateProductAsync(Product product) =>
-            await UpdateProductAsync(product);
+            await UpdateAsync(product);
 
-        public async ValueTask<Product> DeleteProductByIdAsync(Product product) =>
+        public async ValueTask<Product> DeleteProductAsync(Product product) =>
             await DeleteAsync(product);
     }
 }

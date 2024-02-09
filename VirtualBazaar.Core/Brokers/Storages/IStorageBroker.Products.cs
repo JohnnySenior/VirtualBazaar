@@ -11,6 +11,6 @@ namespace VirtualBazaar.Core.Brokers.Storages
         ValueTask<Product> UpdateProductAsync(Product product);
         ValueTask<Product> SelectProductByIdAsync(Guid id);
         IQueryable<Product> SelectAllProducts();
-        ValueTask<Product> DeleteProductByIdAsync(Product product);
+        ValueTask<Product> DeleteProductAsync(Product product);
     }
 }
