@@ -17,7 +17,7 @@ namespace VirtualBazaar.Core.Brokers.Storages
             SelectAll<Order>();
 
         public async ValueTask<Order> UpdateOrderAsync(Order order) =>
-            await UpdateOrderAsync(order);
+            await UpdateAsync(order);
 
         public async ValueTask<Order> DeleteOrderByIdAsync(Order order) =>
             await DeleteAsync(order);

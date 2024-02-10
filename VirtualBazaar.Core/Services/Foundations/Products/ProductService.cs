@@ -33,6 +33,6 @@ namespace VirtualBazaar.Core.Services.Foundations.Products
             await this.storageBroker.UpdateProductAsync(product);
 
         public async ValueTask<Product> RemoveProductAsync(Product product) =>
-            await this.storageBroker.DeleteProductByIdAsync(product);
+            await this.storageBroker.DeleteProductAsync(product);
     }
 }

@@ -21,11 +21,19 @@ namespace VirtualBazaar.Core.Services.Orchestrations.Users
                 if (user.UserStatus is UserStatus.Menu 
                     && checkCategoryOrNot is true)
                 {
+
                     var category = this.categoryService
                         .RetrieveAllCategorys().FirstOrDefault(c => c.Name == update.Message.Text);
 
+                    string message = $"Good choice, what type of {category.Name} do you want? 🤤";
+
                     var products = this.productService
                         .RetrieveAllProducts().Where(p => p.CategoryId == category.Id);
+
+                    if(products is null || !products.Any())
+                    {
+                        message = "Empty :(";
+                    }
 
                     var markup = ProductsMarkup(products);
                     user.UserStatus = UserStatus.Category;
@@ -34,7 +42,7 @@ namespace VirtualBazaar.Core.Services.Orchestrations.Users
                     await this.userTelegramService.SendMessageAsync(
                            userTelegramId: update.Message.Chat.Id,
                            replyMarkup: markup,
-                           message: $"Good choice, what type of {category.Name} do you want? 🤤");
+                           message: message);
 
                     return true;
                 }

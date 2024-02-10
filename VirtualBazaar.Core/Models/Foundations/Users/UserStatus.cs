@@ -11,6 +11,7 @@
         ChangeAddress,
         Menu,
         Category,
-        Product
+        Product,
+        Basket
     }
 }
